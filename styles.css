@@ -1,0 +1,116 @@
+:root {
+  --primary: #3B82F6;
+  --primary-dark: #2563EB;
+  --secondary: #10B981;
+  --secondary-dark: #059669;
+  --background: #F8FAFC;
+  --surface: #FFFFFF;
+  --text: #1E293B;
+  --text-secondary: #64748B;
+  --border: #E0E5EC;
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #60A5FA;
+    --primary-dark: #3B82F6;
+    --secondary: #34D399;
+    --secondary-dark: #10B981;
+    --background: #0F172A;
+    --surface: #1E293B;
+    --text: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+  }
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.container {
+  text-align: center;
+  background-color: var(--surface);
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px var(--shadow);
+  width: 90%;
+  max-width: 400px;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text);
+}
+
+.timer {
+  font-size: 5rem;
+  font-weight: 700;
+  margin: 2rem 0;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.controls button {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+#start, #pause, #reset {
+  grid-column: span 2;
+  background-color: var(--primary);
+  color: white;
+}
+
+#start:hover, #pause:hover, #reset:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+#work, #rest {
+  background-color: var(--surface);
+  border: 2px solid var(--border);
+  color: var(--text);
+}
+
+#work.active {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: white;
+}
+
+#rest.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+#status-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+} 
