@@ -1,5 +1,5 @@
-:root {
-  --primary: yellow;
+:root[data-theme="light"] {
+  --primary: #3B82F6;
   --primary-dark: #2563EB;
   --secondary: #10B981;
   --secondary-dark: #059669;
@@ -11,19 +11,17 @@
   --shadow: rgba(0, 0, 0, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #60A5FA;
-    --primary-dark: #3B82F6;
-    --secondary: #34D399;
-    --secondary-dark: #10B981;
-    --background: #0F172A;
-    --surface: #1E293B;
-    --text: #F1F5F9;
-    --text-secondary: #94A3B8;
-    --border: #334155;
-    --shadow: rgba(0, 0, 0, 0.3);
-  }
+:root[data-theme="dark"] {
+  --primary: #60A5FA;
+  --primary-dark: #3B82F6;
+  --secondary: #34D399;
+  --secondary-dark: #10B981;
+  --background: #0F172A;
+  --surface: #1E293B;
+  --text: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --border: #334155;
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -45,6 +43,7 @@ body {
   box-shadow: 0 10px 30px var(--shadow);
   width: 90%;
   max-width: 400px;
+  position: relative;
 }
 
 h1 {
@@ -113,4 +112,32 @@ h1 {
   font-weight: 500;
   color: var(--text-secondary);
   margin-top: 1rem;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface);
+    border: 2px solid var(--border);
+    color: var(--text);
+    transition: all 0.2s ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--border);
 } 

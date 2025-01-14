@@ -10,6 +10,8 @@ const resetButton = document.getElementById('reset');
 const statusText = document.getElementById('status-text');
 const workButton = document.getElementById('work');
 const restButton = document.getElementById('rest');
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
@@ -87,6 +89,31 @@ function updateButtonStyles() {
     }
 }
 
+// Function to toggle theme
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Update toggle button icon
+    const toggleIcon = themeToggle.querySelector('.toggle-icon');
+    toggleIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    
+    // Save preference
+    localStorage.setItem('theme', newTheme);
+}
+
+// Initialize theme
+function initializeTheme() {
+    let theme = localStorage.getItem('theme');
+    if (!theme) {
+        theme = prefersDarkScheme.matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+    const toggleIcon = themeToggle.querySelector('.toggle-icon');
+    toggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
 // Initialize
 timeLeft = 25 * 60;
 updateDisplay();
@@ -97,4 +124,6 @@ startButton.addEventListener('click', startTimer);
 pauseButton.addEventListener('click', pauseTimer);
 resetButton.addEventListener('click', resetTimer);
 workButton.addEventListener('click', setWorkMode);
-restButton.addEventListener('click', setRestMode); 
+restButton.addEventListener('click', setRestMode);
+themeToggle.addEventListener('click', toggleTheme);
+initializeTheme(); 
