@@ -107,8 +107,8 @@ h1 {
 }
 
 #rest.active {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background-color: #8B5CF6;
+  border-color: #8B5CF6;
   color: white;
 }
 
