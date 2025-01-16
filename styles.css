@@ -78,8 +78,13 @@ h1 {
   transition: all 0.2s ease;
 }
 
-#start, #pause, #reset {
+#start {
   grid-column: span 2;
+  background-color: var(--primary);
+  color: white;
+}
+
+#pause, #reset {
   background-color: var(--primary);
   color: white;
 }
