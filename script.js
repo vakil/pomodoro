@@ -12,6 +12,11 @@ const workButton = document.getElementById('work');
 const restButton = document.getElementById('rest');
 const themeToggle = document.getElementById('theme-toggle');
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+const taskModal = document.getElementById('task-modal');
+const taskInput = document.getElementById('task-input');
+const submitTasks = document.getElementById('submit-tasks');
+const taskList = document.getElementById('task-list');
+let tasks = [];
 
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
@@ -28,6 +33,10 @@ function updateDisplay() {
 
 function startTimer() {
     if (timerId === null) {
+        if (tasks.length === 0) {
+            showTaskModal();
+            return;
+        }
         timerId = setInterval(() => {
             timeLeft--;
             updateDisplay();
@@ -56,6 +65,9 @@ function resetTimer() {
     isWorkTime = true;
     timeLeft = 25 * 60;
     statusText.textContent = 'Work Time';
+    // Clear tasks
+    tasks = [];
+    taskList.innerHTML = '';
     updateDisplay();
 }
 
@@ -126,4 +138,56 @@ resetButton.addEventListener('click', resetTimer);
 workButton.addEventListener('click', setWorkMode);
 restButton.addEventListener('click', setRestMode);
 themeToggle.addEventListener('click', toggleTheme);
-initializeTheme(); 
+initializeTheme();
+submitTasks.addEventListener('click', handleTaskSubmit);
+taskInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+        handleTaskSubmit();
+    }
+});
+
+function showTaskModal() {
+    taskModal.style.display = 'flex';
+    taskInput.focus();
+}
+
+function hideTaskModal() {
+    taskModal.style.display = 'none';
+}
+
+function handleTaskSubmit() {
+    tasks = taskInput.value
+        .split('\n')
+        .filter(task => task.trim() !== '')
+        .map(task => task.trim());
+
+    if (tasks.length > 0) {
+        displayTasks();
+        hideTaskModal();
+        startTimer();
+    }
+}
+
+function displayTasks() {
+    taskList.innerHTML = `
+        <ul>
+            ${tasks.map(task => `<li>${task}</li>`).join('')}
+        </ul>
+    `;
+}
+
+function handleEscapeKey(event) {
+    if (event.key === 'Escape') {
+        hideTaskModal();
+    }
+}
+
+function handleClickOutside(event) {
+    if (event.target === taskModal) {
+        hideTaskModal();
+    }
+}
+
+// Add these to your existing event listeners
+document.addEventListener('keydown', handleEscapeKey);
+taskModal.addEventListener('click', handleClickOutside); 

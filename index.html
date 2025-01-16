@@ -15,6 +15,7 @@
             </button>
         </div>
         <h1>Focus Timer</h1>
+        <div id="task-list" class="task-list"></div>
         <div class="timer">
             <span id="minutes">25</span>:<span id="seconds">00</span>
         </div>
@@ -29,6 +30,15 @@
             <p id="status-text">Work Time</p>
         </div>
     </div>
+
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <h2>What tasks are you planning to work on?</h2>
+            <textarea id="task-input" placeholder="Enter your tasks (one per line)"></textarea>
+            <button id="submit-tasks">Start Working</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html> 
